@@ -14,13 +14,14 @@ import java.util.List;
 public class PositivityChecker {
     private final Features features;
     private final NaturalLanguageUnderstanding naturalLanguageUnderstanding;
-    String APIKey = BuildConfig.IBM_NLP_KEY;
+    private final String APIKey = BuildConfig.IBM_NLP_KEY;
+    private final String APIUrl = BuildConfig.IBM_NLP_URL;
 
     public PositivityChecker() {
         IamAuthenticator authenticator = new IamAuthenticator(this.APIKey);
         this.naturalLanguageUnderstanding =
             new NaturalLanguageUnderstanding("2021-08-01", authenticator);
-        naturalLanguageUnderstanding.setServiceUrl("{url}");
+        naturalLanguageUnderstanding.setServiceUrl(APIUrl);
 
 
         List<String> targets = new ArrayList<>();

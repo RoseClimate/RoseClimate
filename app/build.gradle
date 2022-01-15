@@ -12,6 +12,7 @@ android {
   defaultConfig {
 
     buildConfigField("String", "IBM_NLP_KEY", apikeyProperties['IBM_NLP_KEY'])
+    buildConfigField("String", "IBM_NLP_URL", apikeyProperties['IBM_NLP_URL'])
     applicationId "com.example.roseclimate"
     minSdk 28
     targetSdk 30
