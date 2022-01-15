@@ -1,5 +1,4 @@
 package com.example.roseclimate.models;
 
-public class PositivityChecker {
-
+public class FeedItem {
 }
