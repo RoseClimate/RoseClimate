@@ -1,6 +1,7 @@
 package com.example.roseclimate;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        TextView textView1 = findViewById(R.id.volunteerText);
+        TextView textView2 = findViewById(R.id.newsText);
+        textView1.setText("Hi");
+        textView2.setText("Hi2");
+
     }
 
 }
