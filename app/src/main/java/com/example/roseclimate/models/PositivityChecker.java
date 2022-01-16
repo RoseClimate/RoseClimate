@@ -1,5 +1,7 @@
 package com.example.roseclimate.models;
 
+import android.util.Log;
+
 import com.example.roseclimate.BuildConfig;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.watson.natural_language_understanding.v1.NaturalLanguageUnderstanding;
@@ -10,12 +12,16 @@ import com.ibm.watson.natural_language_understanding.v1.model.SentimentOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 
 public class PositivityChecker {
     private final Features features;
     private final NaturalLanguageUnderstanding naturalLanguageUnderstanding;
     private final String APIKey = BuildConfig.IBM_NLP_KEY;
     private final String APIUrl = BuildConfig.IBM_NLP_URL;
+    public final Double posThreshold = 0.2;
 
     public PositivityChecker() {
         IamAuthenticator authenticator = new IamAuthenticator(this.APIKey);
@@ -23,30 +29,41 @@ public class PositivityChecker {
             new NaturalLanguageUnderstanding("2021-08-01", authenticator);
         naturalLanguageUnderstanding.setServiceUrl(APIUrl);
 
-
-        List<String> targets = new ArrayList<>();
-        targets.add("bonds");
+        Log.d("hello"  , "hi4");
 
         SentimentOptions sentiment = new SentimentOptions.Builder()
-            .targets(targets)
             .build();
 
         this.features = new Features.Builder()
             .sentiment(sentiment)
             .build();
     }
-
-    public String analyzeUrl(String url) {
+    public Boolean articleIsPositive(String url){
+        Log.d("hello"  , "hi3");
+        CompletableFuture<Boolean> completableFuture
+            = CompletableFuture.supplyAsync(() -> _analyzeUrl(url));
+        Boolean result = null;
+        try {
+            result = completableFuture.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public boolean _analyzeUrl(String url) {
+        Log.d("hello"  , "hi2");
         AnalyzeOptions parameters = new AnalyzeOptions.Builder()
             .url(url)
             .features(features)
             .build();
-
+        Log.d("hello"  , "hi1");
         AnalysisResults response = this.naturalLanguageUnderstanding
             .analyze(parameters)
             .execute()
             .getResult();
-        System.out.println(response);
-        return response.getSentiment().getDocument().getScore().toString();
+        Log.d("hello"  , String.valueOf(response));
+        return (response.getSentiment().getDocument().getLabel().equals("positive") &&
+            response.getSentiment().getDocument().getScore() > posThreshold);
     }
 }

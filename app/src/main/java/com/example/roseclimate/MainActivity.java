@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.roseclimate.databinding.ActivityMainBinding;
+import com.example.roseclimate.models.PositivityChecker;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         textView1.setText("Hi");
         textView2.setText("Hi2");
 
+        PositivityChecker posCheck = new PositivityChecker();
+        String articleNeg = "https://www.theguardian.com/environment/2022/jan/15/global-heating" +
+            "-linked-early-birth-damage-babies-health";
+        String articlePos = "https://climate.nasa.gov/ask-nasa-climate/3075/nasa-technologies" +
+            "-spin" +
+            "-off-to-fight-climate-change/";
+        textView1.setText(posCheck.articleIsPositive(articlePos).toString());
     }
 
 }
