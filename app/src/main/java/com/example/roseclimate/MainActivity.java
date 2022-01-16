@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(nasaFeed);
         for (FeedItem item : nasaFeed.getItems()) {
             System.out.println(item);
-            newsObjectArray.add(new NewsObject(item.getTitle(), item.getLink(),
+            newsObjectArray.add(new NewsObject(item.getTitle(), item.getGuid(),
                     item.getPubDate(), "NASA"));
         }
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(nyFeed);
         for (FeedItem item : nyFeed.getItems()) {
             System.out.println(item);
-            newsObjectArray.add(new NewsObject(item.getTitle(), item.getLink(),
+            newsObjectArray.add(new NewsObject(item.getTitle(), item.getGuid(),
                     item.getPubDate(), "The New York Times"));
         }
 
