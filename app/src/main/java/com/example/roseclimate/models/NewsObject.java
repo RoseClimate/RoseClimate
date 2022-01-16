@@ -1,12 +1,13 @@
 package com.example.roseclimate.models;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import androidx.annotation.NonNull;
 
-public class NewsObject implements Comparable<NewsObject> {
+public class NewsObject implements Comparable<NewsObject>, Serializable {
     private String title;
     private String link;
     private String pubDate;
@@ -49,5 +50,11 @@ public class NewsObject implements Comparable<NewsObject> {
         }
 
         return thisdate.compareTo(otherdate);
+    }
+
+    @Override
+    public String toString() {
+        return "NewsObject [title=" + title + ", link="+ link + ", pubDate=" + pubDate + ", " +
+            "source" + "=" + source+"]";
     }
 }
