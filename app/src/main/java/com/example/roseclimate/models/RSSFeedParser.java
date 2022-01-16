@@ -27,7 +27,7 @@ public class RSSFeedParser {
     static final String ITEM = "item";
     static final String PUB_DATE = "pubDate";
     static final String GUID = "guid";
-
+    private boolean dumbassHack = false;
     final URL url;
 
     public RSSFeedParser(String feedUrl) {
@@ -42,7 +42,7 @@ public class RSSFeedParser {
         Feed feed = null;
         try {
             boolean isFeedHeader = true;
-            // Set header values intial to the empty string
+            // Set header values initial to the empty string
             String description = "";
             String title = "";
             String link = "";
@@ -101,8 +101,13 @@ public class RSSFeedParser {
                     e.printStackTrace();
                 }
                 if (event.isStartElement()) {
+
                     String localPart = event.asStartElement().getName()
                             .getLocalPart();
+//                    if (dumbassHack){
+//                        link = localPart;
+//                        dumbassHack = false;
+//                    }
                     switch (localPart) {
                         case ITEM:
                             if (isFeedHeader) {
@@ -135,6 +140,9 @@ public class RSSFeedParser {
                             break;
                         case LINK:
                             link = getCharacterData(event, eventReader);
+                            if (link.equals("")){
+                                dumbassHack = true;
+                            }
                             break;
                         case GUID:
                             guid = getCharacterData(event, eventReader);

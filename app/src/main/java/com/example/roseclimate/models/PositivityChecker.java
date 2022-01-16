@@ -29,7 +29,6 @@ public class PositivityChecker {
             new NaturalLanguageUnderstanding("2021-08-01", authenticator);
         naturalLanguageUnderstanding.setServiceUrl(APIUrl);
 
-        Log.d("hello"  , "hi4");
 
         SentimentOptions sentiment = new SentimentOptions.Builder()
             .build();
@@ -39,7 +38,6 @@ public class PositivityChecker {
             .build();
     }
     public Boolean articleIsPositive(String url){
-        Log.d("hello"  , "hi3");
         CompletableFuture<Boolean> completableFuture
             = CompletableFuture.supplyAsync(() -> _analyzeUrl(url));
         Boolean result = null;
@@ -52,17 +50,15 @@ public class PositivityChecker {
     }
     
     public boolean _analyzeUrl(String url) {
-        Log.d("hello"  , "hi2");
         AnalyzeOptions parameters = new AnalyzeOptions.Builder()
             .url(url)
             .features(features)
             .build();
-        Log.d("hello"  , "hi1");
         AnalysisResults response = this.naturalLanguageUnderstanding
             .analyze(parameters)
             .execute()
             .getResult();
-        Log.d("hello"  , String.valueOf(response));
+//        Log.d("IBMinfo"  , String.valueOf(response));
         return (response.getSentiment().getDocument().getLabel().equals("positive") &&
             response.getSentiment().getDocument().getScore() > posThreshold);
     }
