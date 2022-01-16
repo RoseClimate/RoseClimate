@@ -3,6 +3,7 @@ package com.example.roseclimate;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.roseclimate.models.FeedReader;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
