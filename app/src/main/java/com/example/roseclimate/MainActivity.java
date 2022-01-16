@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         TextView textView1 = findViewById(R.id.volunteerText);
         TextView textView2 = findViewById(R.id.newsText);
-        textView1.setText("Hi");
-        textView2.setText("Hi2");
+//        textView1.setText("Hi");
+//        textView2.setText("Hi2");
 
         PositivityChecker posCheck = new PositivityChecker();
         String articleNeg = "https://www.theguardian.com/environment/2022/jan/15/global-heating" +
