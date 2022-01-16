@@ -3,6 +3,7 @@
 NWHacks 2022 project for positive Climate Change news and volunteer enablement
 
 Made by:
+
 [Gurjot](https://github.com/goodfeller)
 
 [Kevin](https://github.com/kevinlinxc)
