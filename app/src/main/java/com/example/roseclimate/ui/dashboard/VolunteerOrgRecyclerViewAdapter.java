@@ -20,14 +20,14 @@ public class VolunteerOrgRecyclerViewAdapter extends RecyclerView.Adapter<Volunt
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView titleText;
         private TextView locationText;
-        private TextView urlText;
+        private TextView tagsText;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.org_title);
             locationText = itemView.findViewById(R.id.org_location);
-            urlText = itemView.findViewById(R.id.editOrgUrl);
+            tagsText = itemView.findViewById(R.id.editTags);
 
         }
 
@@ -39,8 +39,8 @@ public class VolunteerOrgRecyclerViewAdapter extends RecyclerView.Adapter<Volunt
             return locationText;
         }
 
-        public TextView getUrlText() {
-            return urlText;
+        public TextView getTagsText() {
+            return tagsText;
         }
     }
 
@@ -59,7 +59,7 @@ public class VolunteerOrgRecyclerViewAdapter extends RecyclerView.Adapter<Volunt
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         VolunteerOrg volunteerOrg = orgList.getVolunteerOrgList().get(position);
         holder.getTitleText().setText(volunteerOrg.getVolunteerOrg());
-        holder.getUrlText().setText(volunteerOrg.getVolunteerURL());
+        holder.getTagsText().setText(volunteerOrg.getTags());
         holder.getLocationText().setText(volunteerOrg.getLocation());
     }
 

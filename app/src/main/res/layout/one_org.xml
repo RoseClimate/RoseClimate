@@ -70,12 +70,12 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/editOrgUrl"
+                    android:id="@+id/editTags"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="date|text"
-                    android:text="url"
+                    android:text="tags"
                     android:textSize="10sp" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

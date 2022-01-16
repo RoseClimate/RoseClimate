@@ -36,10 +36,29 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        VolunteerOrg org1 = new VolunteerOrg("spec", "https://spec.bc.ca/volunteer/", "Vancouver");
-        VolunteerOrg org2 = new VolunteerOrg("HUB Cycling", "https://www.idealist.org/en/volunteer-opportunity/07e6f31503814b82bf74076ac4148409-youth-advisory-committee-member-hub-cycling-vancouver?utm_source=volunteer-match&amp;utm_medium=feed&amp;utm_campaign=listings-api", "Vancouver");
+        VolunteerOrg org1 = new VolunteerOrg("spec", "https://spec.bc.ca/volunteer/", "Vancouver", "Food, Energy, Gardening, Waste");
+        VolunteerOrg org2 = new VolunteerOrg("HUB Cycling", "https://www.idealist.org/en/volunteer-opportunity/07e6f31503814b82bf74076ac4148409-youth-advisory-committee-member-hub-cycling-vancouver?utm_source=volunteer-match&amp;utm_medium=feed&amp;utm_campaign=listings-api", "Vancouver", "Transportation");
+        VolunteerOrg org3 = new VolunteerOrg("BEST", "https://www.best.bc.ca/support-best/volunteer", "Vancouver", "Transportation");
+        VolunteerOrg org4 = new VolunteerOrg("Coastal First Nations", "https://coastalfirstnations.ca/our-communities/careers/", "Vancouver", "Preservation, Education");
+        VolunteerOrg org5 = new VolunteerOrg("David Suzuki Foundation", "https://davidsuzuki.org/take-action/act-locally/", "Vancouver", "Community Engagement, Activism, Habitat");
+        VolunteerOrg org6 = new VolunteerOrg("Earthsave Canada", "https://www.earthsave.ca/how-to-help/join-us/", "Vancouver", "Food, Education");
+        VolunteerOrg org7 = new VolunteerOrg("EYA", "https://eya.ca/volunteer/", "Vancouver", "Education, Community Engagement");
+        VolunteerOrg org8 = new VolunteerOrg("Robin B. Clark Inc.", "http://www.rbc.bc.ca/contact-us-naturalresourceconsultants/", "Vancouver", "Forestry, Ecosystems");
+        VolunteerOrg org9 = new VolunteerOrg("FarmFolk CityFolk", "https://farmfolkcityfolk.ca/get-involved/volunteer/", "Vancouver", "Agriculture");
+
+
+
         orgList.addVolunteerOrg(org1);
         orgList.addVolunteerOrg(org2);
+        orgList.addVolunteerOrg(org3);
+        orgList.addVolunteerOrg(org4);
+        orgList.addVolunteerOrg(org5);
+        orgList.addVolunteerOrg(org6);
+        orgList.addVolunteerOrg(org7);
+        orgList.addVolunteerOrg(org8);
+        orgList.addVolunteerOrg(org9);
+
+
         setVolunteerOrgRecyclerView();
         return root;
     }
