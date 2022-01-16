@@ -1,6 +1,8 @@
 package com.example.roseclimate.models;
 
-public class NewsObject {
+import androidx.annotation.NonNull;
+
+public class NewsObject implements Comparable<NewsObject> {
     private String title;
     private String link;
     private String pubDate;
@@ -27,5 +29,10 @@ public class NewsObject {
 
     public String getSource() {
         return source;
+    }
+
+    @Override
+    public int compareTo(@NonNull NewsObject newsObject){
+        return this.getPubDate().compareTo(newsObject.getPubDate());
     }
 }
