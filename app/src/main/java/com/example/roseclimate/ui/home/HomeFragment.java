@@ -58,8 +58,24 @@ public class HomeFragment extends Fragment {
             "Change", "https://climate.nasa.gov/ask-nasa-climate/3075/nasa-technologies-spin-off" +
             "-to-fight-climate-change/",
             "April 21, 2021", "NASA");
+        NewsObject newsObject3 = new NewsObject("NASA Technologies Punt off to Fight Climate " +
+            "Change", "https://climate.nasa.gov/ask-nasa-climate/3075/nasa-technologies-spin-off" +
+            "-to-fight-climate-change/",
+            "April 21, 2021", "NASA");
+        NewsObject newsObject4 = new NewsObject("NASA Technologies Punt off to Fight Climate " +
+            "Change", "https://climate.nasa.gov/ask-nasa-climate/3075/nasa-technologies-spin-off" +
+            "-to-fight-climate-change/",
+            "April 21, 2021", "NASA");
+        NewsObject newsObject5 = new NewsObject("NASA Technologies Punt off to Fight Climate " +
+            "Change", "https://climate.nasa.gov/ask-nasa-climate/3075/nasa-technologies-spin-off" +
+            "-to-fight-climate-change/",
+            "April 21, 2021", "NASA");
+
         newsObjects.add(newsObject1);
         newsObjects.add(newsObject2);
+        newsObjects.add(newsObject3);
+        newsObjects.add(newsObject4);
+        newsObjects.add(newsObject5);
         setRecyclerView();
         return root;
     }

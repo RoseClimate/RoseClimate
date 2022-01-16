@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.example.roseclimate.models.Feed;
 import com.example.roseclimate.models.FeedItem;
 import com.example.roseclimate.models.FeedReader;
+import com.example.roseclimate.models.NewsObject;
 import com.example.roseclimate.models.RSSFeedParser;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -17,6 +18,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.roseclimate.databinding.ActivityMainBinding;
 import com.example.roseclimate.models.PositivityChecker;
+
+import java.util.ArrayList;
 //import com.ibm.watson.natural_language_understanding.v1.model.Feed;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,15 +42,28 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        RSSFeedParser parser = new RSSFeedParser("https://climate.nasa.gov/news/rss.xml");
+        RSSFeedParser NasaParser = new RSSFeedParser("https://climate.nasa.gov/news/rss.xml");
 
-//        Feed feed = parser.readFeed();
-//        System.out.println(feed);
-//        for (FeedItem item : feed.getItems()) {
-//            System.out.println(item);
-//
-//        }
+        ArrayList<NewsObject> newsObjectArray = new ArrayList<>();
+
+        Feed nasaFeed = NasaParser.readFeed();
+        System.out.println(nasaFeed);
+        for (FeedItem item : nasaFeed.getItems()) {
+            System.out.println(item);
+            newsObjectArray.add(new NewsObject(item.getTitle(), item.getLink(),
+                    item.getPubDate(), "NASA"));
+        }
+
+        RSSFeedParser NYParser = new RSSFeedParser(
+                "https://rss.nytimes.com/services/xml/rss/nyt/Climate.xml");
+
+        Feed nyFeed = NYParser.readFeed();
+        System.out.println(nyFeed);
+        for (FeedItem item : nyFeed.getItems()) {
+            System.out.println(item);
+            newsObjectArray.add(new NewsObject(item.getTitle(), item.getLink(),
+                    item.getPubDate(), "The New York Times"));
+        }
 
     }
-
-}
+};
