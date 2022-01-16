@@ -1,7 +1,10 @@
 package com.example.roseclimate.ui.dashboard;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ import com.example.roseclimate.R;
 import com.example.roseclimate.databinding.FragmentDashboardBinding;
 import com.example.roseclimate.models.VolunteerOrg;
 import com.example.roseclimate.models.VolunteerOrgList;
+import com.example.roseclimate.ui.RecyclerItemClickListener;
 
 public class DashboardFragment extends Fragment {
 
@@ -45,7 +49,12 @@ public class DashboardFragment extends Fragment {
         VolunteerOrg org7 = new VolunteerOrg("EYA", "https://eya.ca/volunteer/", "Vancouver", "Education, Community Engagement");
         VolunteerOrg org8 = new VolunteerOrg("Robin B. Clark Inc.", "http://www.rbc.bc.ca/contact-us-naturalresourceconsultants/", "Vancouver", "Forestry, Ecosystems");
         VolunteerOrg org9 = new VolunteerOrg("FarmFolk CityFolk", "https://farmfolkcityfolk.ca/get-involved/volunteer/", "Vancouver", "Agriculture");
-
+        VolunteerOrg org10 = new VolunteerOrg("Fored BC", "https://www.foredbc.org/common/main.cfm?ind=3&sin=3&ssi=0", "Vancouver", "Sustainability, Community Engagement, Education");
+        VolunteerOrg org11 = new VolunteerOrg("Greenpeace", "https://www.greenpeace.org/canada/en/act/", "Canada", "Education");
+        VolunteerOrg org12 = new VolunteerOrg("MGABC", "http://mgabc.org/chapters", "British Columbia", "Gardening");
+        VolunteerOrg org13 = new VolunteerOrg("Pacific Salmon Foundation", "https://psf.ca/volunteer/", "Vancouver", "Conservation");
+        VolunteerOrg org14 = new VolunteerOrg("Stanley Park Ecology Society", "https://stanleyparkecology.ca/about/volunteer/", "Vancouver", "Conservation, Education");
+        VolunteerOrg org15 = new VolunteerOrg("Wilderness Committee", "https://www.wildernesscommittee.org/volunteer", "Vancouver", "Wilderness. Preservation");
 
 
         orgList.addVolunteerOrg(org1);
@@ -57,6 +66,13 @@ public class DashboardFragment extends Fragment {
         orgList.addVolunteerOrg(org7);
         orgList.addVolunteerOrg(org8);
         orgList.addVolunteerOrg(org9);
+        orgList.addVolunteerOrg(org10);
+        orgList.addVolunteerOrg(org11);
+        orgList.addVolunteerOrg(org12);
+        orgList.addVolunteerOrg(org13);
+        orgList.addVolunteerOrg(org14);
+        orgList.addVolunteerOrg(org15);
+
 
 
         setVolunteerOrgRecyclerView();
@@ -73,6 +89,31 @@ public class DashboardFragment extends Fragment {
         Context ctx = getActivity();
         volunteerOrgRecyclerView = (RecyclerView) binding.getRoot().findViewById(R.id.v_recycler);
         volunteerOrgRecyclerView.setLayoutManager(new LinearLayoutManager(ctx));
-        volunteerOrgRecyclerView.setAdapter(new VolunteerOrgRecyclerViewAdapter(orgList));
+        VolunteerOrgRecyclerViewAdapter adapter = new VolunteerOrgRecyclerViewAdapter(orgList);
+        volunteerOrgRecyclerView.setAdapter(adapter);
+        volunteerOrgRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(ctx, volunteerOrgRecyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        String url = orgList.getVolunteerOrgList().get(position).getVolunteerURL();
+                        Intent myIntent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(url));
+                        Log.d("Opening url", url);
+                        assert ctx != null;
+                        ctx.startActivity(myIntent);
+
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        orgList.getVolunteerOrgList().remove(position);
+                        volunteerOrgRecyclerView.getRecycledViewPool().clear();
+                        adapter.notifyDataSetChanged();
+                    }
+
+                })
+        );
     }
+
+
 }
