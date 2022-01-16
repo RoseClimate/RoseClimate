@@ -4,8 +4,11 @@ NWHacks 2022 project for positive Climate Change news and volunteer enablement
 
 Made by:
 [Gurjot](https://github.com/goodfeller)
+
 [Kevin](https://github.com/kevinlinxc)
+
 [Richard](https://github.com/rrhan0)
+
 
 # Premise
 Our app does two things. First, it shows you positive news about climate change. This is to 
