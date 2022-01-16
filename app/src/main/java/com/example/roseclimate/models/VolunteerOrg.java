@@ -3,16 +3,14 @@ package com.example.roseclimate.models;
 import java.net.URL;
 
 public class VolunteerOrg {
-    private String orgName;
-    private String vurl;
-    private String description;
-    private String location;
+    private final String orgName;
+    private final String vurl;
+    private final String location;
 
 
-    public VolunteerOrg(String org, String url, String descrip, String location) {
+    public VolunteerOrg(String org, String url, String location) {
         this.orgName = org;
         this.vurl = url;
-        this.description = descrip;
         this.location = location;
     }
 
@@ -20,9 +18,6 @@ public class VolunteerOrg {
         return orgName;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
     public String getVolunteerURL() {
         return vurl;
@@ -32,13 +27,6 @@ public class VolunteerOrg {
         return location;
     }
 
-    @Override
-    public String toString() {
-        return "VolunteerOrg{" +
-                "orgName='" + orgName + '\'' +
-                ", vurl=" + vurl +
-                ", description='" + description + '\'' +
-                ", location='" + location + '\'' +
-                '}';
-    }
+
 }
+
