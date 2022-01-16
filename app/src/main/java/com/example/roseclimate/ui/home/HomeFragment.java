@@ -29,8 +29,8 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        TextView textView1 = getView().findViewById(R.id.volunteerText);
-        TextView textView2 = getView().findViewById(R.id.newsText);
+        TextView textView1 = binding.volunteerText;
+        TextView textView2 = binding.newsText;
         textView1.setText("Hi");
         textView2.setText("Hi2");
 
