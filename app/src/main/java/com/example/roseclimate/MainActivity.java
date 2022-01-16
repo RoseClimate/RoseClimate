@@ -17,6 +17,9 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.roseclimate.databinding.ActivityMainBinding;
 import com.example.roseclimate.models.PositivityChecker;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -50,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
             "-off-to-fight-climate-change/";
         textView1.setText(posCheck.articleIsPositive(articlePos).toString());
 
-        RSSFeedParser parser = new RSSFeedParser("https://climate.nasa.gov/news/rss.xml");
-
-        Feed feed = parser.readFeed();
-        System.out.println(feed);
-        for (FeedItem item : feed.getItems()) {
-            System.out.println(item);
-
-        }
+//        RSSFeedParser parser = new RSSFeedParser("https://climate.nasa.gov/news/rss.xml");
+//
+//        Feed feed = parser.readFeed();
+//        System.out.println(feed);
+//        for (FeedItem item : feed.getItems()) {
+//            System.out.println(item);
+//
+//        }
     }
 
 }
