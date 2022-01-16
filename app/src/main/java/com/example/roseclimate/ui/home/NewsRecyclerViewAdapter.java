@@ -1,5 +1,7 @@
 package com.example.roseclimate.ui.home;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +19,16 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
 
     private List<NewsObject> articles;
 
+    public interface NewsRecyclerClickListener {
+        public void newsRecyclerViewListClicked(View v, int position);
+    }
+    private static NewsRecyclerClickListener clickListener;
+
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView titleText;
         private TextView sourceText;
@@ -44,6 +51,11 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         public TextView getDateText() {
             return dateText;
         }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.newsRecyclerViewListClicked(v, getLayoutPosition());
+        }
     }
 
     public NewsRecyclerViewAdapter(List<NewsObject> articles) {
@@ -63,7 +75,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NewsObject newsObject = articles.get(position);
+        NewsObject newsObject = articles.get(holder.getAdapterPosition());
         holder.getTitleText().setText(newsObject.getTitle());
         holder.getDateText().setText(newsObject.getPubDate());
         holder.getSourceText().setText(newsObject.getSource());

@@ -1,8 +1,13 @@
 package com.example.roseclimate.models;
 
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 
-public class NewsObject implements Comparable<NewsObject> {
+public class NewsObject implements Comparable<NewsObject>, Serializable {
     private String title;
     private String link;
     private String pubDate;
@@ -33,6 +38,23 @@ public class NewsObject implements Comparable<NewsObject> {
 
     @Override
     public int compareTo(@NonNull NewsObject newsObject){
-        return this.getPubDate().compareTo(newsObject.getPubDate());
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
+
+        Date thisdate = null;
+        Date otherdate = null;
+        try {
+            thisdate = sdf.parse(this.getPubDate());
+            otherdate = sdf.parse(newsObject.getPubDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return thisdate.compareTo(otherdate);
+    }
+
+    @Override
+    public String toString() {
+        return "NewsObject [title=" + title + ", link="+ link + ", pubDate=" + pubDate + ", " +
+            "source" + "=" + source+"]";
     }
 }
