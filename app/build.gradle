@@ -8,7 +8,10 @@ apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
   compileSdk 30
-
+  packagingOptions {
+    resources.excludes.add('javax/**')
+    resources.excludes.add('META-INF/**')
+  }
   defaultConfig {
 
     buildConfigField("String", "IBM_NLP_KEY", apikeyProperties['IBM_NLP_KEY'])
@@ -54,4 +57,6 @@ dependencies {
   androidTestImplementation 'androidx.test.ext:junit:1.1.2'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
   implementation 'com.ibm.watson:ibm-watson:9.3.1'
+  implementation group: 'org.apache.openejb', name: 'javaee-api', version: '6.0-1'
+
 }

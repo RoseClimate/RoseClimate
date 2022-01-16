@@ -35,18 +35,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        TextView textView1 = findViewById(R.id.volunteerText);
-        TextView textView2 = findViewById(R.id.newsText);
-        textView1.setText("Hi");
-        textView2.setText("Hi2");
-
-        PositivityChecker posCheck = new PositivityChecker();
-        String articleNeg = "https://www.theguardian.com/environment/2022/jan/15/global-heating" +
-            "-linked-early-birth-damage-babies-health";
-        String articlePos = "https://climate.nasa.gov/ask-nasa-climate/3075/nasa-technologies" +
-            "-spin" +
-            "-off-to-fight-climate-change/";
-        textView1.setText(posCheck.articleIsPositive(articlePos).toString());
     }
 
 }

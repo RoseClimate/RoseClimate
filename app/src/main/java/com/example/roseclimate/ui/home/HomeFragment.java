@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.roseclimate.R;
 import com.example.roseclimate.databinding.FragmentHomeBinding;
+import com.example.roseclimate.models.PositivityChecker;
 
 public class HomeFragment extends Fragment {
 
@@ -28,13 +29,18 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        TextView textView1 = getView().findViewById(R.id.volunteerText);
+        TextView textView2 = getView().findViewById(R.id.newsText);
+        textView1.setText("Hi");
+        textView2.setText("Hi2");
+
+        PositivityChecker posCheck = new PositivityChecker();
+        String articleNeg = "https://www.theguardian.com/environment/2022/jan/15/global-heating" +
+            "-linked-early-birth-damage-babies-health";
+        String articlePos = "https://climate.nasa.gov/ask-nasa-climate/3075/nasa-technologies" +
+            "-spin" +
+            "-off-to-fight-climate-change/";
+        textView1.setText(posCheck.articleIsPositive(articlePos).toString());
         return root;
     }
 
