@@ -41,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         RSSFeedParser parser = new RSSFeedParser("https://climate.nasa.gov/news/rss.xml");
 
-//        Feed feed = parser.readFeed();
-//        System.out.println(feed);
-//        for (FeedItem item : feed.getItems()) {
-//            System.out.println(item);
-//
-//        }
+        Feed feed = parser.readFeed();
+        System.out.println(feed);
+        for (FeedItem item : feed.getItems()) {
+            System.out.println(item);
+
+        }
 
     }
 
