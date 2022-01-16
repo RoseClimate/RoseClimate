@@ -57,16 +57,49 @@ public class RSSFeedParser {
             // Setup a new eventReader
             CompletableFuture<InputStream> completableFuture
                     = CompletableFuture.supplyAsync(() -> read());
-            InputStream in = null;
+            InputStream in;
+            XMLEventReader eventReader = null;
             try {
                 in = completableFuture.get();
+                CompletableFuture<XMLEventReader> completableFuture2
+                        = CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return inputFactory.createXMLEventReader(in);
+                    } catch (XMLStreamException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                });
+
+                try {
+                    eventReader = completableFuture2.get();
+
+                } catch (ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
-            XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+
+
             // read the XML document
             while (eventReader.hasNext()) {
-                XMLEvent event = eventReader.nextEvent();
+                XMLEvent event = null;
+                XMLEventReader finalEventReader1 = eventReader;
+                CompletableFuture<XMLEvent> completableFuture4
+                        = CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return finalEventReader1.nextEvent();
+                    } catch (XMLStreamException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                });
+                try {
+                    event = completableFuture4.get();
+                } catch (ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
                 if (event.isStartElement()) {
                     String localPart = event.asStartElement().getName()
                             .getLocalPart();
@@ -77,7 +110,22 @@ public class RSSFeedParser {
                                 feed = new Feed(title, link, description, language,
                                         copyright, pubdate);
                             }
-                            event = eventReader.nextEvent();
+                            event = null;
+                            XMLEventReader finalEventReader = eventReader;
+                            CompletableFuture<XMLEvent> completableFuture3
+                                    = CompletableFuture.supplyAsync(() -> {
+                                try {
+                                    return finalEventReader.nextEvent();
+                                } catch (XMLStreamException e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            });
+                            try {
+                                event = completableFuture3.get();
+                            } catch (ExecutionException | InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             break;
                         case TITLE:
                             title = getCharacterData(event, eventReader);
@@ -113,7 +161,22 @@ public class RSSFeedParser {
                         item.setLink(link);
                         item.setTitle(title);
                         feed.getItems().add(item);
-                        event = eventReader.nextEvent();
+                        event = null;
+                        XMLEventReader finalEventReader2 = eventReader;
+                        CompletableFuture<XMLEvent> completableFuture5
+                                = CompletableFuture.supplyAsync(() -> {
+                            try {
+                                return finalEventReader2.nextEvent();
+                            } catch (XMLStreamException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        });
+                        try {
+                            event = completableFuture5.get();
+                        } catch (ExecutionException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         continue;
                     }
                 }
@@ -122,18 +185,27 @@ public class RSSFeedParser {
             throw new RuntimeException(e);
         }
 
-//        try {
-//            feed = completableFuture.get();
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
+
         return feed;
     }
 
     private String getCharacterData(XMLEvent event, XMLEventReader eventReader)
             throws XMLStreamException {
         String result = "";
-        event = eventReader.nextEvent();
+        CompletableFuture<XMLEvent> completableFuture
+                = CompletableFuture.supplyAsync(() -> {
+            try {
+                return eventReader.nextEvent();
+            } catch (XMLStreamException e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
+        try {
+            event = completableFuture.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
         if (event instanceof Characters) {
             result = event.asCharacters().getData();
         }
