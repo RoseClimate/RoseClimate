@@ -2,12 +2,17 @@ package com.example.roseclimate.models;
 
 import androidx.annotation.NonNull;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class VolunteerOrgList implements Iterable<VolunteerOrg>{
     private List<VolunteerOrg> volunteerOrgList;
+
+    public void addVolunteerOrg(String orgName, String url, String description, String location) {
+        volunteerOrgList.add(new VolunteerOrg(orgName, url, description, location));
+    }
 
     public VolunteerOrgList() {
         volunteerOrgList = new ArrayList<>();

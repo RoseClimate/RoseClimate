@@ -4,12 +4,12 @@ import java.net.URL;
 
 public class VolunteerOrg {
     private String orgName;
-    private URL vurl;
+    private String vurl;
     private String description;
     private String location;
 
 
-    public VolunteerOrg(String org, URL url, String descrip, String location) {
+    public VolunteerOrg(String org, String url, String descrip, String location) {
         this.orgName = org;
         this.vurl = url;
         this.description = descrip;
@@ -24,7 +24,7 @@ public class VolunteerOrg {
         return description;
     }
 
-    public URL getVolunteerURL() {
+    public String getVolunteerURL() {
         return vurl;
     }
 
