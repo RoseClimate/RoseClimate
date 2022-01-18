@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
     private Map<String, String> trustedSources = new HashMap<String, String>();
     private PositivityChecker posCheck;
 
-
+    private int articleMax = 25;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         // generic code
@@ -63,6 +63,8 @@ public class HomeFragment extends Fragment {
 //                ".com/services/xml/rss/nyt/Climate.xml");
         trustedSources.put("The Guardian", "https://www.theguardian" +
             ".com/environment/climate-crisis/rss");
+        trustedSources.put("The New York Times", "https://rss.nytimes" +
+            ".com/services/xml/rss/nyt/Climate.xml");
         return root;
     }
 
@@ -71,6 +73,7 @@ public class HomeFragment extends Fragment {
         super.onStart();
         View root = binding.getRoot();
         ProgressBar pb = root.findViewById(R.id.circularProgressIndicator);
+        int articleCount = 0;
         if (((Cache) getActivity().getApplication()).getNewsObjects() == null) {
             pb.setVisibility(View.VISIBLE);
             for (Map.Entry<String, String> entry : trustedSources.entrySet()) {
@@ -78,10 +81,17 @@ public class HomeFragment extends Fragment {
                 String rssFeed = entry.getValue();
                 RSSFeedParser Parser = new RSSFeedParser(rssFeed);
                 Feed feed = Parser.readFeed();
+                if (articleCount > articleMax){
+                    break;
+                }
                 for (FeedItem item : feed.getItems()) {
-                    if (posCheck.articleIsPositive(item.getLink())){
-                        newsObjects.add(new NewsObject(item.getTitle(), item.getLink(),
+                    if (articleCount > articleMax){
+                        break;
+                    }
+                    if (posCheck.articleIsPositive(item.getGuid())){
+                        newsObjects.add(new NewsObject(item.getTitle(), item.getGuid(),
                             item.getPubDate(), source));
+                        articleCount++;
                     }
 
                 }
